@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Square from './Square';
 import GameOver from './GameOver';
 
@@ -21,6 +21,11 @@ export default function TicTacToe() {
     const [winner, setWinner] = useState("");
     const [endGame, setEndGame] = useState(false);
     const [tie, setTie] = useState(false);
+
+    // check for winner or tie after each move, useEffect prevents infinite loop
+    useEffect(() => {
+        checkEndGame();
+    }, [grid, endGame])
 
     function handleNewGame() {
         setGrid(Array(9).fill(""));
@@ -51,19 +56,20 @@ export default function TicTacToe() {
                     setWinner(grid[a]);
                     return;
                 }
-                // check if grid is full
-                let roundTie = !grid.includes("");
-                roundTie && setTie(true) && setEndGame(true);
+            }
+            // check if grid is full without any winning combos
+            let roundTie = !grid.includes("");
+            if (roundTie) {
+                setEndGame(true);
+                setTie(true);
             }
         }
     }
-    // check for end game after each move
-    checkEndGame();
 
     return (
         <div>
-            <h1>Click a square to begin an epic game of Tic-Tac-Toe!</h1>
-            <h2>It is {player ? "Player 1" : "Player 2"}'s turn!</h2>
+            <h1 className="absolute top-20 left-0 right-0 text-4xl">Click a square to start a round of Tic-Tac-Toe</h1>
+            <h2 className="text-2xl">{player ? "Player 1" : "Player 2"}'s turn</h2>
             {endGame && (
                 <GameOver
                     winner={winner}

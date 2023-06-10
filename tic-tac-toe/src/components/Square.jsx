@@ -2,11 +2,11 @@ import React from 'react';
 
 export default function Square({ squares, handleClick }) {
     return (
-        <div className="board">
+        <div className="inline-grid grid-cols-3 gap-1 mt-10">
             {squares.map((square, i) => (
                 square === "" ? (
                 <button 
-                className="square"
+                className="btn btn-primary btn-lg border-2 border-white aspect-square text-2xl"
                 key={i}
                 onClick={() => handleClick(i)}
                 >
@@ -14,7 +14,7 @@ export default function Square({ squares, handleClick }) {
                 </button>
                 ) : (
                     <button
-                    className="disabled"
+                    className="btn btn-secondary btn-lg border-2 border-white cursor-not-allowed aspect-square "
                     key={i}
                     onClick={() => handleClick(i)}
                     >
