@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Square({ squares, handleClick }) {
     return (
-        <div className="inline-grid grid-cols-3 gap-1 mt-10">
+        <div className="inline-grid grid-cols-3 gap-1 mt-3">
             {squares.map((square, i) => (
                 square === "" ? (
                 <button 

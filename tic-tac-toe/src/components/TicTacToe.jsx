@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Square from './Square';
 import GameOver from './GameOver';
 import Scoreboard from './Scoreboard';
+import ThemeMenu from './ThemeMenu';
 
 const X = "X";
 const O = "O";
@@ -73,8 +74,9 @@ export default function TicTacToe() {
 
     return (
         <div>
-            <h1 className="text-4xl">Click a square to start a round of Tic-Tac-Toe</h1>
-            <h2 className="text-2xl mt-5">{player ? "Player 1" : "Player 2"}'s turn</h2>
+            <h1 className="text-4xl">Welcome to Tic-Tac-Toe!</h1>
+            <h2 className="text-xl mt-1">Click a square to start the game</h2>
+            <ThemeMenu />
             {endGame && (
                 <GameOver
                     winner={winner}
@@ -83,6 +85,7 @@ export default function TicTacToe() {
                     handleNewGame={handleNewGame}
                 />
             )}
+            <h3 className="text-xl mt-12">{player ? "Player 1" : "Player 2"}'s turn</h3>
             <Square
                 squares={grid}
                 handleClick={handleClick}
