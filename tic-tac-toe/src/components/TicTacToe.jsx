@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Square from './Square';
 import GameOver from './GameOver';
+import Scoreboard from './Scoreboard';
 
 const X = "X";
 const O = "O";
@@ -21,6 +22,8 @@ export default function TicTacToe() {
     const [winner, setWinner] = useState("");
     const [endGame, setEndGame] = useState(false);
     const [tie, setTie] = useState(false);
+    const [winCounterX, setWinCounterX] = useState(0);
+    const [winCounterO, setWinCounterO] = useState(0);
 
     // check for winner or tie after each move, useEffect prevents infinite loop
     useEffect(() => {
@@ -54,7 +57,9 @@ export default function TicTacToe() {
                     setEndGame(true);
                     // set the winner based on the value of the first square in the winning combo
                     setWinner(grid[a]);
-                    return;
+                    // increment the win counter for the winning player
+                    grid[a] === X ? setWinCounterX(winCounterX + 1) : setWinCounterO(winCounterO + 1);
+                    return
                 }
             }
             // check if grid is full without any winning combos
@@ -68,8 +73,8 @@ export default function TicTacToe() {
 
     return (
         <div>
-            <h1 className="absolute top-20 left-0 right-0 text-4xl">Click a square to start a round of Tic-Tac-Toe</h1>
-            <h2 className="text-2xl">{player ? "Player 1" : "Player 2"}'s turn</h2>
+            <h1 className="text-4xl">Click a square to start a round of Tic-Tac-Toe</h1>
+            <h2 className="text-2xl mt-5">{player ? "Player 1" : "Player 2"}'s turn</h2>
             {endGame && (
                 <GameOver
                     winner={winner}
@@ -81,6 +86,10 @@ export default function TicTacToe() {
             <Square
                 squares={grid}
                 handleClick={handleClick}
+            />
+            <Scoreboard
+                winCounterX={winCounterX}
+                winCounterO={winCounterO}
             />
         </div>
     )
