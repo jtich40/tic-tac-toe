@@ -74,7 +74,7 @@ export default function TicTacToe() {
 
     return (
         <div>
-            <h1 className="text-4xl">Welcome to Tic-Tac-Toe!</h1>
+            <h1 className="text-4xl">Welcome to Tich-Tac-Toe!</h1>
             <h2 className="text-xl mt-1">Click a square to start the game</h2>
             <ThemeMenu />
             {endGame && (
